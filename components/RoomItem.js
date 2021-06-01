@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 const RoomItem = ({ room }) => {
   const router = useRouter();
-  console.log(router);
   const deleteOneRoome = async () => {
     try {
       const option = {
