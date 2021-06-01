@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Button from "../../components/Button";
@@ -19,6 +20,10 @@ const search = () => {
     router.push('/'+queryString)
   };
   return (
+    <>
+    <Head>
+        <title>Roomies | Search Room</title>
+      </Head>
     <div className="container">
       <form className="form" encType="multipart/form-data">
         <h2>Search Room</h2>
@@ -33,7 +38,7 @@ const search = () => {
           value={roomSearch.location}
           onChange={onChange}
         />
-        <label htmlFor="pricePerMonth">Filter by price</label>
+        <label htmlFor="pricePerMonth">Filter by Price</label>
         <select
           name="pricePerMonth"
           id="pricePerMonth"
@@ -62,6 +67,7 @@ const search = () => {
         )}
       </form>
     </div>
+    </>
   );
 };
 

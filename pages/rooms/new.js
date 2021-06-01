@@ -3,9 +3,10 @@ import Form from "../../components/Form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Head from "next/head";
 const CreateNewRoom = () => {
   const router = useRouter();
-  const createNewRoom = async (roomData,setIsLoading) => {
+  const createNewRoom = async (roomData, setIsLoading) => {
     try {
       const option = {
         url: process.env.NEXT_PUBLIC_DOMAIN + "/api/rooms",
@@ -15,21 +16,26 @@ const CreateNewRoom = () => {
       const { data } = await axios(option);
       console.log(data);
       router.push("/");
-    } catch (error) {  
+    } catch (error) {
       const { data } = error.response;
-      toast("🏘️ "+ data.message);
+      toast("🏘️ " + data.message);
       setIsLoading(false);
     }
   };
   return (
-    <div className="container">
-      <Form
-        type={"Create"}
-        title={"Create New Room"}
-        onSubmit={createNewRoom}
-        room={{}}
-      />
-    </div>
+    <>
+      <Head>
+        <title>Roomies | Create New Room</title>
+      </Head>
+      <div className="container">
+        <Form
+          type={"Create"}
+          title={"Create New Room"}
+          onSubmit={createNewRoom}
+          room={{}}
+        />
+      </div>
+    </>
   );
 };
 

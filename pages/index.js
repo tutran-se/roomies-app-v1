@@ -1,11 +1,8 @@
 import axios from "axios";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import Button from "../components/Button";
-import Form from "../components/Form";
-import Loader from "../components/Loader";
 import RoomItem from "../components/RoomItem";
 import Link from "next/link";
+import Head from "next/head";
 
 export async function getServerSideProps(context) {
   const {
@@ -30,9 +27,12 @@ export async function getServerSideProps(context) {
 
 export default function Page({ data, pageNumber }) {
   const { rooms, isPrevious, isNext, result } = data;
-  const router = useRouter();
   return (
+
     <main>
+      <Head>
+        <title>Roomies | Home</title>
+      </Head>
       <div style={{ width: "100%" }}>
         <Link href="/">
           <a>
