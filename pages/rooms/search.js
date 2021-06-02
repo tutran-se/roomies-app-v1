@@ -16,7 +16,7 @@ const search = () => {
   };
   const handleRoomSearch = () => {
     const { location, pricePerMonth, type } = roomSearch;
-    let queryString = `?location=${location}&pricePerMonth=${pricePerMonth}&type=${type}`;
+    let queryString = `?pageNumber=1&location=${location}&pricePerMonth=${pricePerMonth}&type=${type}`;
     router.push('/'+queryString)
   };
   return (

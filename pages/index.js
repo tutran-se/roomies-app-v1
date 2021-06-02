@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import RoomItem from "../components/RoomItem";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
   const {
@@ -21,14 +22,15 @@ export async function getServerSideProps(context) {
   };
   const { data } = await axios(option);
   return {
-    props: { data, pageNumber }, // will be passed to the page component as props
+    props: { data, pageNumber,type,location,pricePerMonth }, // will be passed to the page component as props
   };
 }
 
-export default function Page({ data, pageNumber }) {
+export default function Page({ data, pageNumber,type,location,pricePerMonth }) {
   const { rooms, isPrevious, isNext, result } = data;
+  const nextRoute = type ? `/?pageNumber=${Number(pageNumber)+1}&location=${location}&pricePerMonth=${pricePerMonth}&type=${type}`:`/?pageNumber=${Number(pageNumber)+1}`
+  const previousRoute = type ? `/?pageNumber=${Number(pageNumber)-1}&location=${location}&pricePerMonth=${pricePerMonth}&type=${type}`:`/?pageNumber=${Number(pageNumber)-1}`
   return (
-
     <main>
       <Head>
         <title>Roomies | Home</title>
@@ -62,7 +64,7 @@ export default function Page({ data, pageNumber }) {
 
           <div className="pagination">
             {result ? (<>
-              <Link href={`/?pageNumber=${Number(pageNumber)-1}`}>
+              <Link href={previousRoute}>
           <a>
           <Button
               label="Previous"
@@ -70,7 +72,7 @@ export default function Page({ data, pageNumber }) {
             />
           </a>
         </Link>
-        <Link href={`/?pageNumber=${Number(pageNumber)+1}`}>
+        <Link href={nextRoute}>
           <a>
           <Button label="Next" disable={!isNext} />
           </a>
